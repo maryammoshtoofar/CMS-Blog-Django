@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import api from "../api";
-import Post from "../components/post";
+import Post from "../components/postCard";
 import "../styles/home.css";
 
 function Home() {
@@ -16,10 +16,7 @@ function Home() {
     api
       .get("/api/posts/")
       .then((res) => res.data)
-      .then((data) => {
-        setPosts(data);
-        console.log(data);
-      })
+      .then((data) => setPosts(data))
       .catch((err) => console.log(err));
   };
 

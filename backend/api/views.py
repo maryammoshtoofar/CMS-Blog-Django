@@ -12,13 +12,17 @@ class PostListCreate(generics.ListCreateAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        return Post.objects.filter(author=user)
+        return Post.objects.all()
     
     def perform_create(self, serializer):
         if serializer.is_valid():
             serializer.save(author = self.request.user)
         else:
             print(serializer.errors)
+
+class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
   
 class PostDelete(generics.DestroyAPIView):
     serializer_class = PostSerializer
